@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nizams-kathi-kabab",
+  "private_key_id": "dced020c6fd49ff1ba6fafd35211b5724284870e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzhOAs+rFW6Vaj\na1zSwElWs1TB0aY2piBeuR4GoviEQywMs/YbxqIqvXRSOMY6Vea24KK4TLmmrl0+\n4ABkP8+m3tPjMR5srJL3CQjLqPV+drACboDpNhXADrdGCeeaG3PHdESqhSQDDJXa\nfhSwdidgp+RMnwANlugkFn0Kctx//ZkjMDH4sEqY+5KULjWC4iAtHJYh6jLJDGr+\nGT9SI5JRjU52PoMbACx2fK9RYFEeIj2UEVftBn+3QVjpnyb9AwyRwMquUgSnEX68\n0NvzjDlDP7aSdc3qR4NEikACt9xxbon0kdtFuomweURjZe5MU8ahPnCKfQvWdAzY\nj3Ui9BZ3AgMBAAECggEAHdGmgxIpPuyHbaG5y3ARPouPOpqeZ1l06wcIy8VqTl3y\nBTInYTm/WiYaGkY/9xSpvBrYLJDiDaPM7VK7/erzjR5aR9Sy3w5TYyFnCp1IGfeR\nCPZeB17qgfpvyvx+MgT5WFohxclT0AXZJm/m8+DMbau1qlyG37r/WG872e52XfP0\nptr8LziridWMZehBnmzvRdhV3pvCNti/HXfh6+TxKHlOXtXbhZZdCNJKh9vykkDs\nmKkeY2hVZEXAJevwo81v55LahA6jUVxkoqCEkLH3FKvkfoofS0z8TGnDVF8vZ8Or\njKHjM9UpmrslBB7Q0694RzAL7Lv71SP0sE3ALWUQkQKBgQDeAUfGr4IAcCwFsjxK\nI3ImujLYZYDAiLS8s1Js/EVr7zyMsKNWZkN/p+h7za6LEbeuPuoxqbJwns8ToV48\nOeCles1s2Anx8xbLm/LNGtrbMNliwNnMRnqUYb1DoCo/rgEdxhJC08SqUylq9nZd\nmAhh8yuQm6G0LJJBrh1FMZHZ8wKBgQDPAh9IMckOmprSLMJJSAyN0b2VgCvobkVi\nzJxpjSh781qdLU7tCVoUWHK6oum7jjEc3UXWV30Nh3bSq7nfVtzlHTAtj1Qs2nWA\nr2WgMlM2gJMrXD9zGMPFasV3d4SKTd3w/tIAQNl6VyILlHKHkW+oEAkc3onePssI\nobYLXxUObQKBgCARuUeXNMVRbtqHy7O9+RBlF1ExIG8vkEQt9zstGe4kie+c2Itz\njE6Vd7ziklMehRUTm4r/A3rHRgyE4/L5PV1KJwCRGKatwd45sdI1DeZZ4R0l1JBw\noeZrVAa/zTqTrS+a3CpxItij2LjNz31np9ZWZTWnda1sPthkCXBkX7hHAoGAP5Vl\nSmWQXh365Ae/fYbV5FHCK8N8uR31zg0PFhS3lKsA8DpUfdZbhthMFSupI2TfjQAi\nTV3+GUO8qaT5qLIjk3RNshDOSCCp6ub1DimnCZygl7bz/kRjDaZoFPPvEBQu0bFT\ni6RfqIZO/MOSEjYH19VlFyr7qfobnwEcy41fCFkCgYEAtwPWrAqN27noBecPZYB2\nWODk7FjI7HoiN4T8UezibP4eO/JKQrVgk6f/kXZwhSADHV6CyYe+rOZGAbShtVPI\nOoKWZ12IVbpfqWQ3od2V/04pW2m7W5MwaI4LQs7P3irmcmn5u0l47kXW3WJBZL5s\nYtPdcYavSaRXCglVifljHZc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-abbkn@nizams-kathi-kabab.iam.gserviceaccount.com",
+  "client_id": "102183056054519901566",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-abbkn%40nizams-kathi-kabab.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
