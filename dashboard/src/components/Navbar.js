@@ -42,6 +42,7 @@ function ResponsiveDrawer(props) {
     setAnchorEl(null);
   };
   const navigate = useNavigate();
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
