@@ -1,14 +1,15 @@
 const admin = require('firebase-admin');
-
+const uuid = require('uuid');
 // Initializing Firebase Admin SDK
-const serviceAccount = require('./path-to-your-firebase-service-account-key.json');
-admin.initializeApp({
+const serviceAccount = require('../serviceKey.json');
+  admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
 // Firestore collections
 const promotionsCollection = admin.firestore().collection('promotions');
 const usersCollection = admin.firestore().collection('users');
+const usedPromotionsCollection = admin.firestore().collection('usedPromotions');
 
 // Function to calculate distance between two coordinates using Haversine formula
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -22,15 +23,22 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const distance = R * c;
   return distance;
 }
+function generatePromoCode() {
+  const uuid = uuid.v4();
+  return uuid.substr(0, 6).toUpperCase();
+}
 
 // API endpoint to send notifications to users within the specified range
 async function sendNotifications(req, res) {
     try {
-      const { userId, latitude, longitude, promotionalCode } = req.body;
+      const { userId, latitude, longitude } = req.body;
   
       const usersCollection = admin.firestore().collection('users');
       const promotionsCollection = admin.firestore().collection('promotions');
   
+      // Generate a promotional code
+      const promotionalCode = generatePromoCode();
+      
       // Check if the user already has an active code
       const userDoc = await usersCollection.doc(userId).get();
       if (userDoc.exists && userDoc.data().activeCode) {
@@ -68,9 +76,6 @@ async function sendNotifications(req, res) {
   
         return res.json({ message: 'Notifications sent successfully', notifications });
       }
-  
-      // User is not within the specified range or already has an active code
-      return res.json({ message: 'User does not meet the criteria for receiving a promotion' });
     } catch (error) {
       console.error('Error sending notifications:', error.message);
       return res.status(500).json({ error: 'Internal server error' });
@@ -87,29 +92,29 @@ async function disablePromotion(req, res) {
   
       // Check if the user exists and has the provided promotional code as an active code
       const userDoc = await usersCollection.doc(userId).get();
-  
-      if (!userDoc.exists || userDoc.data().activeCode !== promotionalCode) {
-        return res.status(400).json({ message: 'Invalid request. User or promotional code not found.' });
-      }
-  
-      // Implement additional logic to mark the code as used in another collection
-      const usedPromotionData = {
-        userId: userId,
-        promotionalCode: promotionalCode,
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      };
-  
-      // Save the used promotion data to the 'usedPromotions' collection
-      await usedPromotionsCollection.add(usedPromotionData);
-  
-      // Clear the active code for the user
-      await usersCollection.doc(userId).update({ activeCode: null });
-  
-      return res.json({ message: 'Promotion disabled successfully' });
-    } catch (error) {
-      console.error('Error disabling promotion:', error.message);
-      return res.status(500).json({ error: 'Internal server error' });
+
+    if (!userDoc.exists || userDoc.data().activeCode !== promotionalCode) {
+      return res.status(400).json({ message: 'Invalid request. User or promotional code not found.' });
     }
+
+    // Implement additional logic to mark the code as used in another collection
+    const usedPromotionData = {
+      userId: userId,
+      promotionalCode: promotionalCode,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    // Save the used promotion data to the 'usedPromotions' collection
+    await usedPromotionsCollection.add(usedPromotionData);
+
+    // Clear the active code for the user
+    await usersCollection.doc(userId).update({ activeCode: null });
+
+    return res.json({ message: 'Promotion disabled successfully' });
+  } catch (error) {
+    console.error('Error disabling promotion:', error.message);
+    return res.status(500).json({ error: 'Internal server error' });
   }
+}
   
   module.exports = { sendNotifications, disablePromotion };
