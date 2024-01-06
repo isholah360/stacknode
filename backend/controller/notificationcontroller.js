@@ -1,10 +1,6 @@
-const admin = require('firebase-admin');
+const { admin, db } = require('../firebase');
 const uuid = require('uuid');
-// Initializing Firebase Admin SDK
-const serviceAccount = require('../serviceKey.json');
-  admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+
 
 // Firestore collections
 const promotionsCollection = admin.firestore().collection('promotions');
