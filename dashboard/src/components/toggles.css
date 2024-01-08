@@ -71,3 +71,13 @@
     align-items: center;
     gap: .7rem;
   }
+  .submit:hover{
+  background-color: #E4780E;
+  }
+  .submit{
+    border-radius: .5rem;
+    padding: .3rem .5rem;
+    border-style: none;
+    }
+    
+  

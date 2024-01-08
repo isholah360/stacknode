@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 const { admin } = require("../firebase");
 const uuid = require("uuid");
+=======
+const { admin, db } = require('../firebase');
+const uuid = require('uuid');
+
+>>>>>>> 1d23e42497968af97f5b2cee3d8ca3b0395b4974
 
 // Firestore collections
 const promotionsCollection = admin.firestore().collection("promotions");

@@ -152,7 +152,7 @@ function ResponsiveDrawer(props) {
               />
             </label>
             <br />
-            <button type="submit">Update Distances</button>
+            <button className="submit" type="submit">Update Distances</button>
           </form>
         </div>
       </>
