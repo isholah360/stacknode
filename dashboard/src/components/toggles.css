@@ -78,6 +78,13 @@
     border-radius: .5rem;
     padding: .3rem .5rem;
     border-style: none;
+    margin: .5rem 0;
+    background-color: #ccc;
     }
-    
+    label input{
+        width: 2.5rem;
+        padding: .2rem .5rem;
+        border-width: .5px;
+        margin: .5rem .5em; border-radius: 5px;
+    }
   
