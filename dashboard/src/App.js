@@ -20,6 +20,7 @@ import { Layout } from "./layout";
 import { AuthProvider } from "./hooks/useAuth";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ProtectedRoute } from "./layout/ProjectedRoute";
+import Notify from "./components/notify";
 const outerTheme = createTheme({
   palette: {
     primary: {
@@ -33,6 +34,8 @@ const outerTheme = createTheme({
 
 function App() {
   return (
+    <>
+   
     <ThemeProvider theme={outerTheme}>
       <Router>
         <AuthProvider>
@@ -174,7 +177,9 @@ function App() {
           </Routes>
         </AuthProvider>
       </Router>
+   
     </ThemeProvider>
+    </>
   );
 }
 

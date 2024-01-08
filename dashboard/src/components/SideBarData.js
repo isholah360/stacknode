@@ -5,7 +5,11 @@ import * as IoIcons from "react-icons/io";
 import * as FaIcons from "react-icons/fa";
 import * as VscIcons from "react-icons/vsc";
 import { Abc, Category } from "@mui/icons-material";
+
+
+import Notify from "./notify";
 export const SideBarData = [
+  
   {
     title: "Reports",
     path: "/",
@@ -43,7 +47,7 @@ export const SideBarData = [
     cname: "nav-text",
   },
   {
-    title: "Users",
+    title: "User",
     path: "/users",
     icon: <FaIcons.FaUsers color="#E4780E" size={28} />,
     cname: "nav-text",
@@ -54,10 +58,16 @@ export const SideBarData = [
     icon: <FaIcons.FaUserEdit color="#E4780E" size={28} />,
     cname: "nav-text",
   },
+ 
   {
     title: "Orders",
     path: "/orders",
     icon: <IoIcons.IoMdCart color="#E4780E" size={28} />,
     cname: "nav-text",
   },
+ 
+ 
 ];
+
+
+

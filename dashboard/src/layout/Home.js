@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Navigate, Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
+
 export const Home = () => {
   const { user } = useAuth();
 
@@ -20,6 +21,7 @@ export const Home = () => {
     <div>
       <Bar />
       <Outlet />
+    
     </div>
   );
 };
@@ -53,7 +55,9 @@ function Bar() {
             sx={{ fontWeight: "bold", flexGrow: 1 }}
           >
             Keventers Caf&#233; &amp; Wraps
+            <Clikced/>
           </Typography>
+         
           {user ? (
             <Button
               color="inherit"
@@ -68,9 +72,18 @@ function Bar() {
             <Button color="inherit" component={Link} to="/login">
               Login
             </Button>
+            
           )}
         </Toolbar>
       </AppBar>
     </Box>
   );
+}
+
+const Clikced = ()=>{
+  return(
+    <>
+    <Button>Clikc</Button>
+    </>
+  )
 }

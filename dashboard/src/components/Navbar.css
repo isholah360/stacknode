@@ -72,3 +72,9 @@
   span {
     margin-left: 16px;
   }
+  .hello{
+    font-size: 6rem;
+    opacity: 1;
+    font-weight: 600;
+   
+  }

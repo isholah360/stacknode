@@ -1,15 +1,5 @@
 const router = require("express").Router();
-const { initializeApp, cert } = require("firebase-admin/app");
-const { getAuth } = require("firebase-admin/auth");
-
-var serviceAccount = require("./serviceAccount.json");
-// keventers-53ebe-firebase-adminsdk-u7w0p-09ad948083
-initializeApp({
-  credential: cert(serviceAccount),
-  databaseURL: "https://keventers-53ebe-default-rtdb.firebaseio.com",
-});
-// Initialize Firebase
-
+const { admin, db } = require('./firebase'); // Adjust the path accordingly
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEVENTERS, {
   apiVersion: "2022-08-01",
 });
@@ -106,7 +96,7 @@ router.post("/future", async (req, res) => {
       ephemeralKey: ephemeralKey.secret,
       customer: customer.id,
       publishableKey:
-        "pk_test_51Lhc7tFVFJYWYMVVNd7n6MwlqXH4jEaH7HW2AB55xLRS6fHGFAYa5VLjHOlvWP6KU9DNOQoPQmMe0niqxE1kzSWP00lXXKdxSk",
+        process.env.publishablekey,
     });
   } catch (err) {
     // Catch any error and send error 500 to client
@@ -140,7 +130,7 @@ router.post("/duringpayment", async (req, res) => {
       ephemeralKey: ephemeralKey.secret,
       customer: customer.id,
       publishableKey:
-        "pk_test_51Lhc7tFVFJYWYMVVNd7n6MwlqXH4jEaH7HW2AB55xLRS6fHGFAYa5VLjHOlvWP6KU9DNOQoPQmMe0niqxE1kzSWP00lXXKdxSk",
+      process.env.publishablekey,
     });
   } catch (err) {
     // Catch any error and send error 500 to client

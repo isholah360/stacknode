@@ -1,6 +1,9 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
+import "./toggles.css";
+import axios from "axios";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -26,10 +29,45 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../config";
 import { onAuthStateChanged } from "firebase/auth";
-// import "./Navbar.css";
+
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  const [featureEnabled, setFeatureEnabled] = useState(false);
+  const [distanceData, setDistanceData] = useState({
+    minDistance: "",
+    maxDistance: "",
+  });
+
+  const handleChange = (e) => {
+    setDistanceData({ ...distanceData, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdateDistances = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/update-distances",
+        distanceData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error updating distances:", error.message);
+    }
+  };
+
+  const handleToggle = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/togglePromoCodeFeature"
+      );
+      setFeatureEnabled(response.data.status);
+    } catch (error) {
+      console.error("Error toggling feature:", error.message);
+    }
+  };
+
   const { window } = props;
   const { logout, user } = useAuth();
 
@@ -82,6 +120,42 @@ function ResponsiveDrawer(props) {
           </ListItem>
         ))}
       </List>
+      <>
+        <div className="promo-container">
+          <div className="switch-box">
+            <label className="switch">
+              <input type="checkbox" onClick={handleToggle} />
+              <span className="slider round"></span>
+            </label>
+          </div>
+          <div className="promocode">TurnOn Promo</div>
+        </div>
+        <div className="adjust-distance">
+          <form onSubmit={handleUpdateDistances}>
+            <label>
+              Min Distance:
+              <input
+                type="text"
+                name="minDistance"
+                value={distanceData.minDistance}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            <label>
+              Max Distance:
+              <input
+                type="text"
+                name="maxDistance"
+                value={distanceData.maxDistance}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            <button type="submit">Update Distances</button>
+          </form>
+        </div>
+      </>
       <Divider />
     </div>
   );
