@@ -37,6 +37,7 @@ function ResponsiveDrawer(props) {
   const [distanceData, setDistanceData] = useState({
     minDistance: "",
     maxDistance: "",
+    dealName: "",
   });
 
   const handleChange = (e) => {
@@ -48,7 +49,7 @@ function ResponsiveDrawer(props) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/update-distances",
+        "https://back-6k5o.onrender.com/api/update-distances",
         distanceData
       );
       console.log(response.data);
@@ -60,7 +61,7 @@ function ResponsiveDrawer(props) {
   const handleToggle = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/togglePromoCodeFeature"
+        "https://back-6k5o.onrender.com/api/togglePromoCodeFeature"
       );
       setFeatureEnabled(response.data.status);
     } catch (error) {
@@ -132,6 +133,17 @@ function ResponsiveDrawer(props) {
         </div>
         <div className="adjust-distance">
           <form onSubmit={handleUpdateDistances}>
+            <div className="dealname">
+              <div>
+                Deals:
+                <input
+                  type="text"
+                  name="dealName"
+                  value={distanceData.dealName}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
             <label>
               Min Distance:
               <input
@@ -152,7 +164,9 @@ function ResponsiveDrawer(props) {
               />
             </label>
             <br />
-            <button className="submit" type="submit">Update Distances</button>
+            <button className="submit" type="submit">
+              Update Deals
+            </button>
           </form>
         </div>
       </>

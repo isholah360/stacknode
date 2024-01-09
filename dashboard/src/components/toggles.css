@@ -90,3 +90,11 @@
     .adjust-distance{
      margin-left: 1.1rem;
     }
+    .dealname{
+    
+    }
+    .dealname div input{
+      width: 7.5rem;
+      padding: .3rem .5rem;
+      margin: .3rem .5em; border-radius: 5px;
+    }

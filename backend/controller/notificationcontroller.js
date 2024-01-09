@@ -34,16 +34,17 @@ let promoCodeFeatureEnabled = false;
 async function updateDistances(req, res) {
   try {
     // Extract minDistance and maxDistance from the request body
-    const { minDistance, maxDistance } = req.body;
+    const { minDistance, maxDistance, dealName } = req.body;
 
-    // Store minDistance and maxDistance in a global variable 
+    // Store minDistance and maxDistance in a global variable
     global.minDistance = parseFloat(minDistance);
     global.maxDistance = parseFloat(maxDistance);
+    global.dealName = dealName;
 
-    return res.json({ message: 'Distances updated successfully' });
+    return res.json({ message: "Distances updated successfully" });
   } catch (error) {
-    console.error('Error updating distances:', error.message);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error("Error updating distances:", error.message);
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
 
@@ -57,7 +58,11 @@ async function sendNotifications(req, res) {
     const { userId, latitude, longitude } = req.body;
 
     // Check if minDistance and maxDistance are defined
-    if (typeof global.minDistance !== 'undefined' && typeof global.maxDistance !== 'undefined') {
+    if (
+      typeof global.minDistance !== "undefined" &&
+      typeof global.maxDistance !== "undefined" &&
+      typeof global.dealName !== "undefined"
+    ) {
       const promotionalCode = generatePromoCode();
 
       const userDoc = await usersCollection.doc(userId).get();
@@ -92,7 +97,7 @@ async function sendNotifications(req, res) {
 
         const notifications = usersInRange.map((user) => ({
           userId: user,
-          message: `New promotion! Use code ${promotionalCode}`,
+          message: `New promotion! Use code ${promotionalCode} for ${global.dealName} `,
         }));
 
         await usersCollection.doc(userId).set({ activeCode: promotionalCode });
@@ -103,18 +108,19 @@ async function sendNotifications(req, res) {
         });
       } else {
         // Handle case where user is outside the specified distance range
-        return res.json({ message: "User is outside the specified distance range" });
+        return res.json({
+          message: "User is outside the specified distance range",
+        });
       }
     } else {
       // Handle case where minDistance or maxDistance is not defined
-      return res.status(500).json({ error: 'Distances not defined' });
+      return res.status(500).json({ error: "Distances not defined" });
     }
   } catch (error) {
     console.error("Error sending notifications:", error.message);
     return res.status(500).json({ error: "Internal server error" });
   }
 }
-
 
 // API endpoint to disable a promotional code after a user has accepted it
 async function disablePromotion(req, res) {
@@ -156,8 +162,8 @@ async function togglePromoCodeFeature(req, res) {
     promoCodeFeatureEnabled = !promoCodeFeatureEnabled;
     return res.json({ status: promoCodeFeatureEnabled });
   } catch (error) {
-    console.error('Error toggling promo code feature:', error.message);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error("Error toggling promo code feature:", error.message);
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
 
