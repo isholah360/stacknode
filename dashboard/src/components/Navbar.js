@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import "./toggles.css";
 import axios from "axios";
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -34,12 +36,26 @@ const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   const [featureEnabled, setFeatureEnabled] = useState(false);
+  const [displayTosty, setDisplayTosty] = useState(false);
   const [distanceData, setDistanceData] = useState({
     minDistance: "",
     maxDistance: "",
     dealName: "",
   });
-
+  const handleLogin = () => {
+    // Replace this with your actual authentication logic
+    
+    setDisplayTosty(!displayTosty)
+    const position = 'top-right'; // Set the position to top-right
+    
+    if (!displayTosty) {
+      toast.success('Deel Update', {
+        autoClose: 2000,
+        transition: Slide, // Use the Slide transition
+        position: position,
+      });
+    } 
+  }
   const handleChange = (e) => {
     setDistanceData({ ...distanceData, [e.target.name]: e.target.value });
   };
@@ -164,8 +180,13 @@ function ResponsiveDrawer(props) {
               />
             </label>
             <br />
-            <button className="submit" type="submit">
+            <button className="submit" type="submit" onClick={handleLogin}>
               Update Deals
+              <ToastContainer
+                transition={Slide} 
+                position="top-right" 
+                marginTop  ="2rem"
+              />
             </button>
           </form>
         </div>
